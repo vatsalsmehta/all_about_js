@@ -46,4 +46,6 @@ const uncancelledusers2=userData.map((element)=>{
 
 console.log(uncancelledusers2);
 
-
+//Return data whose username is Novin, it returns the first element it finds and stops the iteration of array
+const user = userData.find((element) => element.userName==="Novin");
+console.log(user);

@@ -16,26 +16,31 @@ const userData=[
         },
         metaData:[
             {
-                octoberAdSeen: false
+                monthNumber: 1,
+                januaryAdSeen: true
             },
-            {
-                novemberAdSeen: false
+            {   monthNumber: 2,
+                februaryAdSeen: false
             }
         ]
     },
 ]
 
+var html=``;
 userData.map((eachItem,index)=>{
 if(eachItem.userTransactionDetails.cancelled){
-    eachItem.metaData.forEach((data)=>{
-        if(data.novemberAdSeen){
-            data.octoberAdSeen=true;
-        }else{
-            data.novemberAdSeen=true;
+    var januarydata, februarydata;
+    eachItem?.metaData?.map((monthlydata)=>{
+        switch(monthlydata.monthNumber){
+            case 1:
+                januarydata=monthlydata.januaryAdSeen;
+            case 2:
+                februarydata=monthlydata.februaryAdSeen;
         }
     })
-    const html=`
-    <div key=${eachItem.userId}>
+    
+    const temp=`
+    <div key=${index}>
         <div>
             Name is ${eachItem.userName}
         </div>
@@ -43,10 +48,13 @@ if(eachItem.userTransactionDetails.cancelled){
             TransactionValue is ${eachItem.userTransactionDetails.transactionValue}
         </div>
         <div>
-            Data for october is
+            User Saw ad for january is ${januarydata}
+            User saw ad for febraury is ${februarydata}
         </div>
     </div>`
 
-    console.log(html);
+    html= html.concat(temp);
 }
 })
+
+console.log(html);
